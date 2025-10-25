@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace CapaEntidad
 {
-    public class EPartidoPol
+    public class ETipoEleccion
     {
-        public int IdPartido { get; set; }
+        public int IdTipo { get; set; }
         public string Nombre { get; set; }
-        public string Sigla { get; set; }
-        public bool Estado { get; set; }
     }
 }

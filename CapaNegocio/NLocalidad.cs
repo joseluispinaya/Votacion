@@ -33,9 +33,23 @@ namespace CapaNegocio
             return DLocalidad.GetInstance().ListaRecintos(IdLocalidad);
         }
 
-        public Respuesta<List<EMesa>> ListaMesas(int IdRecinto)
+        public Respuesta<List<EMesa>> ListaMesas(int IdRecinto, int IdEleccion)
         {
-            return DLocalidad.GetInstance().ListaMesas(IdRecinto);
+            return DLocalidad.GetInstance().ListaMesas(IdRecinto, IdEleccion);
         }
+        public Respuesta<List<ETipoEleccion>> ListaTiposEle()
+        {
+            return DLocalidad.GetInstance().ListaTiposEle();
+        }
+        public Respuesta<List<EEleccion>> ListaElecciones()
+        {
+            return DLocalidad.GetInstance().ListaElecciones();
+        }
+
+        public Respuesta<bool> RegistrarEleccion(EEleccion oEleccion)
+        {
+            return DLocalidad.GetInstance().RegistrarEleccion(oEleccion);
+        }
+
     }
 }

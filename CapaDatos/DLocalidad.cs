@@ -122,7 +122,7 @@ namespace CapaDatos
             }
         }
 
-        public Respuesta<List<EMesa>> ListaMesas(int IdRecinto)
+        public Respuesta<List<EMesa>> ListaMesas(int IdRecinto, int IdEleccion)
         {
             try
             {
@@ -130,10 +130,11 @@ namespace CapaDatos
 
                 using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
                 {
-                    using (SqlCommand comando = new SqlCommand("usp_MesasIdRecinto", con))
+                    using (SqlCommand comando = new SqlCommand("usp_MesasIdRecintoEleccion", con))
                     {
                         comando.CommandType = CommandType.StoredProcedure;
                         comando.Parameters.AddWithValue("@IdRecinto", IdRecinto);
+                        comando.Parameters.AddWithValue("@IdEleccion", IdEleccion);
                         con.Open();
 
                         using (SqlDataReader dr = comando.ExecuteReader())
@@ -144,6 +145,7 @@ namespace CapaDatos
                                 {
                                     IdMesa = Convert.ToInt32(dr["IdMesa"]),
                                     IdRecinto = Convert.ToInt32(dr["IdRecinto"]),
+                                    IdEleccion = Convert.ToInt32(dr["IdEleccion"]),
                                     NumeroMesa = Convert.ToInt32(dr["NumeroMesa"]),
                                     Estado = Convert.ToBoolean(dr["Estado"])
                                 });
@@ -167,6 +169,141 @@ namespace CapaDatos
                     Mensaje = "Ocurrió un error: " + ex.Message,
                     Data = null
                 };
+            }
+        }
+
+        //elecciones
+        public Respuesta<List<ETipoEleccion>> ListaTiposEle()
+        {
+            try
+            {
+                List<ETipoEleccion> rptLista = new List<ETipoEleccion>();
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("usp_ObtenerTipoEleccion", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        con.Open();
+
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                rptLista.Add(new ETipoEleccion()
+                                {
+                                    IdTipo = Convert.ToInt32(dr["IdTipo"]),
+                                    Nombre = dr["Nombre"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+                return new Respuesta<List<ETipoEleccion>>()
+                {
+                    Estado = true,
+                    Data = rptLista,
+                    Mensaje = "TipoEleccion obtenidos correctamente"
+                };
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error inesperado
+                return new Respuesta<List<ETipoEleccion>>()
+                {
+                    Estado = false,
+                    Mensaje = "Ocurrió un error: " + ex.Message,
+                    Data = null
+                };
+            }
+        }
+
+        public Respuesta<List<EEleccion>> ListaElecciones()
+        {
+            try
+            {
+                List<EEleccion> rptLista = new List<EEleccion>();
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("ObtenerElecciones", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        con.Open();
+
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                rptLista.Add(new EEleccion()
+                                {
+                                    IdEleccion = Convert.ToInt32(dr["IdEleccion"]),
+                                    Descripcion = dr["Descripcion"].ToString(),
+                                    Estado = Convert.ToBoolean(dr["Estado"]),
+                                    FechaRegistro = Convert.ToDateTime(dr["FechaRegistro"]).ToString("dd/MM/yyyy"),
+                                    RefTipoEleccion = new ETipoEleccion
+                                    {
+                                        Nombre = dr["Tipo"].ToString()
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }
+                return new Respuesta<List<EEleccion>>()
+                {
+                    Estado = true,
+                    Data = rptLista,
+                    Mensaje = "EEleccion obtenidos correctamente"
+                };
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error inesperado
+                return new Respuesta<List<EEleccion>>()
+                {
+                    Estado = false,
+                    Mensaje = "Ocurrió un error: " + ex.Message,
+                    Data = null
+                };
+            }
+        }
+
+        public Respuesta<bool> RegistrarEleccion(EEleccion oEleccion)
+        {
+            try
+            {
+                bool respuesta = false;
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_RegistrarEleccion", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@IdTipo", oEleccion.IdTipo);
+                        cmd.Parameters.AddWithValue("@IdAdmin", oEleccion.IdAdmin);
+                        cmd.Parameters.AddWithValue("@Descripcion", oEleccion.Descripcion);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+                return new Respuesta<bool>
+                {
+                    Estado = respuesta,
+                    Mensaje = respuesta ? "Se registro correctamente" : "Error al registrar intente mas tarde"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<bool> { Estado = false, Mensaje = "Ocurrió un error: " + ex.Message };
             }
         }
 

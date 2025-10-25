@@ -9,13 +9,10 @@ namespace CapaEntidad
     public class EDelegado
     {
         public int IdDelegado { get; set; }
-        public string NombreCompleto { get; set; }
-        public string CI { get; set; }
-        public string Correo { get; set; }
-        public string Celular { get; set; }
-        public string Usuario { get; set; }
-        public string ClaveHash { get; set; }
+        public int IdPersona { get; set; }
+        public int IdEleccion { get; set; }
         public int IdMesa { get; set; }
-        public string Rol { get; set; }
+        public string FechaRegistro { get; set; }
+        public EPersona RefPersona { get; set; }
     }
 }

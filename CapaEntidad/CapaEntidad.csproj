@@ -41,12 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EAdministrador.cs" />
     <Compile Include="EDelegado.cs" />
+    <Compile Include="EEleccion.cs" />
     <Compile Include="ELocalidad.cs" />
     <Compile Include="EMesa.cs" />
     <Compile Include="EPartidoPol.cs" />
+    <Compile Include="EPersona.cs" />
     <Compile Include="ERecinto.cs" />
     <Compile Include="EResultado.cs" />
+    <Compile Include="ETipoEleccion.cs" />
     <Compile Include="EVotoEspecial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Respuesta.cs" />

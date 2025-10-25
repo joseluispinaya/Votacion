@@ -9,6 +9,7 @@ namespace CapaEntidad
     public class EVotoEspecial
     {
         public int IdVotoEsp { get; set; }
+        public int IdEleccion { get; set; }
         public int IdMesa { get; set; }
         public int Nulos { get; set; }
         public int Blancos { get; set; }

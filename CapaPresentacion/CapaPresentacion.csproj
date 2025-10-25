@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="css\sb-admin-2.css" />
     <Content Include="css\sb-admin-2.min.css" />
+    <Content Include="Imagenes\Avanzar.png" />
     <Content Include="Imagenes\odontologia.png" />
     <Content Include="Imagenes\reporttf.png" />
     <Content Include="img\bienvenida.gif" />
@@ -85,6 +86,12 @@
     <Content Include="js\vistas\chart-bar-demo.js" />
     <Content Include="js\vistas\chart-pie-demo.js" />
     <Content Include="js\vistas\datatables-demo.js" />
+    <Content Include="MasterAdmin\DelegadosAdmin.aspx" />
+    <Content Include="MasterAdmin\EleccionAdmin.aspx" />
+    <Content Include="MasterAdmin\InicioAdmin.aspx" />
+    <Content Include="MasterAdmin\jsadm\EleccionAdmin.js" />
+    <Content Include="MasterAdmin\jsadm\LocalidadesAdmin.js" />
+    <Content Include="MasterAdmin\LocalidadesAdmin.aspx" />
     <Content Include="PagePartidos.aspx" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js" />
@@ -1797,6 +1804,41 @@
     <Compile Include="Inicio.aspx.designer.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MasterAdmin\DelegadosAdmin.aspx.cs">
+      <DependentUpon>DelegadosAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterAdmin\DelegadosAdmin.aspx.designer.cs">
+      <DependentUpon>DelegadosAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterAdmin\EleccionAdmin.aspx.cs">
+      <DependentUpon>EleccionAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterAdmin\EleccionAdmin.aspx.designer.cs">
+      <DependentUpon>EleccionAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterAdmin\HomeAdmin.Master.cs">
+      <DependentUpon>HomeAdmin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterAdmin\HomeAdmin.Master.designer.cs">
+      <DependentUpon>HomeAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MasterAdmin\InicioAdmin.aspx.cs">
+      <DependentUpon>InicioAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterAdmin\InicioAdmin.aspx.designer.cs">
+      <DependentUpon>InicioAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterAdmin\LocalidadesAdmin.aspx.cs">
+      <DependentUpon>LocalidadesAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterAdmin\LocalidadesAdmin.aspx.designer.cs">
+      <DependentUpon>LocalidadesAdmin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PagePartidos.aspx.cs">
       <DependentUpon>PagePartidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1814,6 +1856,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MasterAdmin\HomeAdmin.Master" />
     <None Include="packages.config" />
     <Content Include="SiteHome.Master" />
     <Content Include="scss\navs\_global.scss" />
@@ -2005,6 +2048,7 @@
       <Name>CapaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

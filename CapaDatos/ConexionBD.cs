@@ -29,7 +29,7 @@ namespace CapaDatos
             SqlConnection conexion = new SqlConnection
             {
                 //ConnectionString = @"Data Source=SQL1001.site4now.net;Initial Catalog=db_abec4f_exportacion;User Id=db_abec4f_exportacion_admin;Password=Yamil2025"
-                ConnectionString = "Data Source=.;Initial Catalog=SisVotacion;Integrated Security=True"
+                ConnectionString = "Data Source=.;Initial Catalog=Democracia;Integrated Security=True"
             };
 
             return conexion;
