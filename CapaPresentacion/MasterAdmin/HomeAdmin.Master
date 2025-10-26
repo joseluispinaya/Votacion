@@ -86,8 +86,14 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="MesasAdmin.aspx">
+                    <i class="fas fa-fw fa-archive"></i>
+                    <span>Agregar Mesas</span></a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="DelegadosAdmin.aspx">
-                    <i class="fas fa-fw fa-clipboard-list"></i>
+                    <i class="fas fa-fw fa-diagnoses"></i>
                     <span>Delegados</span></a>
             </li>
 

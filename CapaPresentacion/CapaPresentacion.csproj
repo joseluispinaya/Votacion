@@ -91,7 +91,9 @@
     <Content Include="MasterAdmin\InicioAdmin.aspx" />
     <Content Include="MasterAdmin\jsadm\EleccionAdmin.js" />
     <Content Include="MasterAdmin\jsadm\LocalidadesAdmin.js" />
+    <Content Include="MasterAdmin\jsadm\MesasAdmin.js" />
     <Content Include="MasterAdmin\LocalidadesAdmin.aspx" />
+    <Content Include="MasterAdmin\MesasAdmin.aspx" />
     <Content Include="PagePartidos.aspx" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js" />
@@ -1838,6 +1840,13 @@
     </Compile>
     <Compile Include="MasterAdmin\LocalidadesAdmin.aspx.designer.cs">
       <DependentUpon>LocalidadesAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterAdmin\MesasAdmin.aspx.cs">
+      <DependentUpon>MesasAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterAdmin\MesasAdmin.aspx.designer.cs">
+      <DependentUpon>MesasAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="PagePartidos.aspx.cs">
       <DependentUpon>PagePartidos.aspx</DependentUpon>
