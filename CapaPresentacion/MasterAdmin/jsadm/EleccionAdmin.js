@@ -180,13 +180,13 @@ $('#btnGuardarCambios').on('click', function () {
         return;
     }
 
-    //const usuarioNeg = JSON.parse(sessionStorage.getItem('usuTienda'));
+    const usuaAdmi = JSON.parse(sessionStorage.getItem('adminSist'));
 
     const modelo = structuredClone(MODELO_BASE);
     modelo["IdEleccion"] = parseInt($("#txtIdEleccion").val());
     modelo["IdTipo"] = $("#cboTipo").val();
-    //modelo["IdAdmin"] = parseInt(usuarioNeg.IdNegocio);
-    modelo["IdAdmin"] = 1;
+    modelo["IdAdmin"] = parseInt(usuaAdmi.IdAdmin);
+    //modelo["IdAdmin"] = 1;
     modelo["Descripcion"] = $("#txtDescipcion").val().trim();
     
 

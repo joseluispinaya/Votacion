@@ -97,7 +97,9 @@
     <Content Include="MasterAdmin\InicioAdmin.aspx" />
     <Content Include="MasterAdmin\jsadm\DelegadosAdmin.js" />
     <Content Include="MasterAdmin\jsadm\EleccionAdmin.js" />
+    <Content Include="MasterAdmin\jsadm\InicioAdmin.js" />
     <Content Include="MasterAdmin\jsadm\LocalidadesAdmin.js" />
+    <Content Include="MasterAdmin\jsadm\MasterpaAd.js" />
     <Content Include="MasterAdmin\jsadm\MesasAdmin.js" />
     <Content Include="MasterAdmin\jsadm\PersonasAdmin.js" />
     <Content Include="MasterAdmin\LocalidadesAdmin.aspx" />

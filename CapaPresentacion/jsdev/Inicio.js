@@ -117,10 +117,16 @@ function cargarPartidosPol(IdEleccion, IdMesa) {
                             $("<td>").text(item.Sigla),
                             $("<td>").append(
                                 $("<input>").attr({
-                                    type: "text",
+                                    type: "number",
                                     value: 0,
+                                    min: 0,
+                                    step: "1", // solo números enteros
                                     class: "form-control form-control-sm cantidad-input input-reducido",
-                                    "data-index": index // Identifica el input con el índice del array
+                                    "data-index": index
+                                }).on("input", function () {
+                                    if (this.value === "" || isNaN(this.value) || parseInt(this.value) < 0) {
+                                        this.value = 0;
+                                    }
                                 })
                             )
                         )
@@ -133,21 +139,52 @@ function cargarPartidosPol(IdEleccion, IdMesa) {
 
 $('#btnRegistroVotos').on('click', function () {
 
+    let valido = true;
     let listaFinal = [];
+
+    // Evita múltiples clicks (sevolverá a activar al final en complete)
+    $('#btnRegistroVotos').prop('disabled', true);
 
     $(".cantidad-input").each(function () {
 
-        let index = $(this).data("index");   // obtiene índice del partido
-        let cantidad = parseInt($(this).val()) || 0;
+        let valor = $(this).val();
 
-        listaFinal.push({
-            IdPartido: listaPartidos[index].IdPartido,
-            //Nombre: listaPartidos[index].Nombre,
-            //Sigla: listaPartidos[index].Sigla,
-            Votos: cantidad
-        });
+        // Validación: vacío, NaN, negativo o no número
+        if (valor === "" || isNaN(valor) || parseInt(valor) < 0) {
 
+            valido = false;
+            //$(this).addClass("is-invalid");
+
+        } else {
+
+            //$(this).removeClass("is-invalid");
+
+            let index = $(this).data("index");
+            listaFinal.push({
+                IdPartido: listaPartidos[index].IdPartido,
+                Votos: parseInt(valor)
+            });
+        }
     });
+
+    // Si hay error, no registra
+    if (!valido) {
+        swal("Advertencia", "Todos los votos deben ser números iguales o mayores a 0.", "warning");
+
+        $('#btnRegistroVotos').prop('disabled', false); // habilitar de nuevo
+        return; // Detener ejecución
+    }
+
+    // Validación simplificada de IdEleccion, IdMesa, IdDelegado
+    if (
+        !parseInt($("#txtIdEleccion").val()) ||
+        !parseInt($("#txtIdMesa").val()) ||
+        !parseInt($("#txtIdDelegado").val())
+    ) {
+        toastr.warning("", "Ocurrió un error, seleccione nuevamente la mesa");
+        $('#btnRegistroVotos').prop('disabled', false);
+        return;
+    }
 
     registrarVotos(listaFinal); // Aquí ves todo en consola
 
@@ -166,7 +203,7 @@ function registrarVotos(listaFinal) {
 
     $.ajax({
         type: "POST",
-        url: "Inicio.aspx/GuardarVotos",
+        url: "Inicio.aspx/GuardarVotosNuevo",
         data: JSON.stringify(request),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

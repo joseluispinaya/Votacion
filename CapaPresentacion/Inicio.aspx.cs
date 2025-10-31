@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using CapaEntidad;
 using CapaNegocio;
 using System.Web.Services;
+using System.Xml.Linq;
 
 namespace CapaPresentacion
 {
@@ -67,6 +68,7 @@ namespace CapaPresentacion
             }
         }
 
+        //no se usa muy complejo
         [WebMethod]
         public static Respuesta<bool> GuardarVotos(int IdEleccion, int IdMesa, int IdDelegado, int Nulos, int Blancos, List<EResultado> ListaResultados)
         {
@@ -84,6 +86,50 @@ namespace CapaPresentacion
             catch (Exception ex)
             {
                 return new Respuesta<bool> { Estado = false, Mensaje = "Ocurrió un error: " + ex.Message };
+            }
+        }
+
+        [WebMethod]
+        public static Respuesta<bool> GuardarVotosNuevo(int IdEleccion, int IdMesa, int IdDelegado, int Nulos, int Blancos, List<EResultado> ListaResultados)
+        {
+            try
+            {
+                if (ListaResultados == null || !ListaResultados.Any())
+                {
+                    return new Respuesta<bool> { Estado = false, Mensaje = "No se encontró datos de votación de los partidos." };
+                }
+
+                // Construcción del XML
+                XElement xml = new XElement("Votacion",
+
+                    new XElement("Especial",
+                        new XElement("IdEleccion", IdEleccion),
+                        new XElement("IdMesa", IdMesa),
+                        new XElement("IdDelegado", IdDelegado),
+                        new XElement("Nulos", Nulos),
+                        new XElement("Blancos", Blancos)
+                    ),
+
+                    new XElement("Resultados",
+                        from item in ListaResultados
+                        select new XElement("Item",
+                            new XElement("IdPartido", item.IdPartido),
+                            new XElement("Votos", item.Votos)
+                        )
+                    )
+                );
+
+                // Enviar XML a la capa negocio
+                Respuesta<bool> respuesta = NResultVoto.GetInstance().GuardarVotosNuevo(xml.ToString());
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<bool>
+                {
+                    Estado = false,
+                    Mensaje = "Ocurrió un error: " + ex.Message
+                };
             }
         }
 

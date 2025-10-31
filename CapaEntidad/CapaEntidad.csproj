@@ -52,6 +52,7 @@
     <Compile Include="EPersona.cs" />
     <Compile Include="ERecinto.cs" />
     <Compile Include="EResultado.cs" />
+    <Compile Include="EResultadoGeneral.cs" />
     <Compile Include="ETipoEleccion.cs" />
     <Compile Include="EVotoEspecial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

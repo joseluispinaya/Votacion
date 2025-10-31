@@ -58,7 +58,7 @@
 
     <div class="modal fade" id="modalVotacion" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content" id="loaddd">
                 <div class="modal-header">
                     <h6>Lista de Partidos</h6>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
