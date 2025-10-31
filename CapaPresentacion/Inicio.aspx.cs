@@ -67,5 +67,25 @@ namespace CapaPresentacion
             }
         }
 
+        [WebMethod]
+        public static Respuesta<bool> GuardarVotos(int IdEleccion, int IdMesa, int IdDelegado, int Nulos, int Blancos, List<EResultado> ListaResultados)
+        {
+            try
+            {
+                if (ListaResultados == null || !ListaResultados.Any())
+                {
+                    return new Respuesta<bool> { Estado = false, Mensaje = "No se encontro datos de votacion de los partidos" };
+                }
+
+                Respuesta<bool> respuesta = NResultVoto.GetInstance().GuardarVotos(IdEleccion, IdMesa, IdDelegado, Nulos, Blancos, ListaResultados);
+
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<bool> { Estado = false, Mensaje = "Ocurrió un error: " + ex.Message };
+            }
+        }
+
     }
 }

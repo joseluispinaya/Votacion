@@ -21,11 +21,6 @@ function mesasAsignadas() {
         $('#tbMesass tbody').empty();
     }
 
-    //var delega = JSON.parse(sessionStorage.getItem('usuDelegado'));
-    //var request = {
-    //    IdPersona: parseInt(idPersona),
-    //    IdEleccion: parseInt(idEleccion)
-    //};
 
     const delega = getDelegado();
     var request = {
@@ -147,16 +142,61 @@ $('#btnRegistroVotos').on('click', function () {
 
         listaFinal.push({
             IdPartido: listaPartidos[index].IdPartido,
-            Nombre: listaPartidos[index].Nombre,
-            Sigla: listaPartidos[index].Sigla,
-            Cantidad: cantidad
+            //Nombre: listaPartidos[index].Nombre,
+            //Sigla: listaPartidos[index].Sigla,
+            Votos: cantidad
         });
 
     });
 
-    console.log(listaFinal); // Aquí ves todo en consola
+    registrarVotos(listaFinal); // Aquí ves todo en consola
 
 });
+
+function registrarVotos(listaFinal) {
+
+    let request = {
+        IdEleccion: $("#txtIdEleccion").val(),
+        IdMesa: $("#txtIdMesa").val(),
+        IdDelegado: $("#txtIdDelegado").val(),
+        Nulos: parseInt($("#txtTotalNulos").val()) || 0,
+        Blancos: parseInt($("#txtTotalBlancos").val()) || 0,
+        ListaResultados: listaFinal
+    };
+
+    $.ajax({
+        type: "POST",
+        url: "Inicio.aspx/GuardarVotos",
+        data: JSON.stringify(request),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        beforeSend: function () {
+            $("#loaddd").LoadingOverlay("show");
+        },
+        success: function (response) {
+            $("#loaddd").LoadingOverlay("hide");
+            if (response.d.Estado) {
+                $('#modalVotacion').modal('hide');
+                swal("Éxito", response.d.Mensaje, "success");
+
+                $("#txtIdEleccion").val("0");
+                $("#txtIdMesa").val("0");
+                $("#txtIdDelegado").val("0");
+
+                mesasAsignadas(); // recargar tabla
+            } else {
+                swal("Mensaje", response.d.Mensaje, "warning");
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            $("#loaddd").LoadingOverlay("hide");
+            swal("Error", "Ocurrió un problema, intente más tarde.", "error");
+        },
+        complete: function () {
+            $('#btnRegistroVotos').prop('disabled', false);
+        }
+    });
+}
 
 function cargarPartidosPolOrigi(IdEleccion, IdMesa) {
 
