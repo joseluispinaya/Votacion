@@ -13,5 +13,7 @@ namespace CapaEntidad
         public int IdEleccion { get; set; }
         public int NumeroMesa { get; set; }
         public bool Estado { get; set; }
+        public string NroMesaStr => $"Nro: {NumeroMesa:D3}";
+        //public string NroMesaStr => $"Nro: {NumeroMesa:D3}";
     }
 }

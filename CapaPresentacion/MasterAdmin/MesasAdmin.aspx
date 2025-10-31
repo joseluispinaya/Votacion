@@ -38,30 +38,35 @@
         <hr />
         <div class="row">
             <div class="col-sm-8">
-                <h6 class="mb-3 font-weight-bold text-primary">Lista de Mesas</h6>
+                <h6 class="mb-3 font-weight-bold text-primary text-center">Lista de Mesas</h6>
 
                 <table class="table table-striped table-bordered table-sm" id="tbMesas" cellspacing="0" style="width: 100%">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Nro Mesa</th>
+                            <th>Nro de Mesa</th>
                             <th>Estado</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td colspan="4" class="text-center">Seleccione una localidad y recinto para ver las mesas</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="col-sm-4">
-                <div class="form-group text-center">
+                <h6 class="mb-3 font-weight-bold text-primary text-center">Registro de Mesa</h6>
+
+                <%--<div class="form-group text-center">
                     <h5><i class="fas fa-archive mr-2"></i>Registro de Mesa</h5>
-                </div>
+                </div>--%>
 
                 <div class="input-group input-group-sm mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupDescuento">Ingrese Nro Mesa:</span>
+                        <span class="input-group-text" id="inputGroupDescuento">Debe Ingresar Nro de Mesa:</span>
                     </div>
                     <input type="text" class="form-control text-center" aria-label="Small"
                         aria-describedby="inputGroupDescuento" id="txtNroMesa">

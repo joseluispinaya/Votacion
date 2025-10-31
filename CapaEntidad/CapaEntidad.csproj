@@ -44,8 +44,10 @@
     <Compile Include="EAdministrador.cs" />
     <Compile Include="EDelegado.cs" />
     <Compile Include="EEleccion.cs" />
+    <Compile Include="EListaMesasDto.cs" />
     <Compile Include="ELocalidad.cs" />
     <Compile Include="EMesa.cs" />
+    <Compile Include="EMesaDto.cs" />
     <Compile Include="EPartidoPol.cs" />
     <Compile Include="EPersona.cs" />
     <Compile Include="ERecinto.cs" />

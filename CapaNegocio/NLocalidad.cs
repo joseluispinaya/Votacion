@@ -50,6 +50,25 @@ namespace CapaNegocio
         {
             return DLocalidad.GetInstance().RegistrarEleccion(oEleccion);
         }
+        public Respuesta<bool> RegistrarMesas(EMesa oMesa)
+        {
+            return DLocalidad.GetInstance().RegistrarMesas(oMesa);
+        }
+
+        public Respuesta<bool> RegistrarPersona(EPersona oPersona)
+        {
+            return DLocalidad.GetInstance().RegistrarPersona(oPersona);
+        }
+
+        public Respuesta<List<EPersona>> ListaPersonas()
+        {
+            return DLocalidad.GetInstance().ListaPersonas();
+        }
+
+        public Respuesta<List<EPersona>> ObtenerPersonasFiltro(string Busqueda)
+        {
+            return DLocalidad.GetInstance().ObtenerPersonasFiltro(Busqueda);
+        }
 
     }
 }

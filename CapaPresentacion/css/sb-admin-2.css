@@ -9945,13 +9945,21 @@ a:focus {
   background-size: cover;
 } */
 
-.bg-gradient-primary {
+/* .bg-gradient-primary {
   background-color: #004A93;
   background-size: cover;
+} */
+.bg-gradient-primary {
+    background-color: #2c5140;
+    background-size: cover;
 }
 
-.bg-second-primary{
+/* .bg-second-primary{
   background-color: #004A93 !important;
+} */
+
+.bg-second-primary {
+    background-color: #1cc88a !important;
 }
 
 

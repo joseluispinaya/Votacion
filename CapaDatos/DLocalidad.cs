@@ -307,5 +307,219 @@ namespace CapaDatos
             }
         }
 
+        public Respuesta<bool> RegistrarMesas(EMesa oMesa)
+        {
+            try
+            {
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_RegistrarMesa", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Parámetros de entrada
+                        cmd.Parameters.AddWithValue("@IdRecinto", oMesa.IdRecinto);
+                        cmd.Parameters.AddWithValue("@IdEleccion", oMesa.IdEleccion);
+                        cmd.Parameters.AddWithValue("@NumeroMesa", oMesa.NumeroMesa);
+
+                        // Parámetro de salida
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Int)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        // Ejecutar
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+
+                        // Leer resultado
+                        int resultado = Convert.ToInt32(outputParam.Value);
+
+                        // Evaluar resultado
+                        switch (resultado)
+                        {
+                            case 1:
+                                return new Respuesta<bool>
+                                {
+                                    Estado = true,
+                                    Mensaje = "Mesa registrada correctamente.",
+                                    Data = true
+                                };
+
+                            case 0:
+                                return new Respuesta<bool>
+                                {
+                                    Estado = false,
+                                    Mensaje = "Ya existe una mesa con ese número para el recinto y elección.",
+                                    Data = false
+                                };
+
+                            case 2:
+                            default:
+                                return new Respuesta<bool>
+                                {
+                                    Estado = false,
+                                    Mensaje = "Error al registrar la mesa (valores inválidos o error en BD).",
+                                    Data = false
+                                };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<bool>
+                {
+                    Estado = false,
+                    Mensaje = "Ocurrió un error: " + ex.Message,
+                    Data = false
+                };
+            }
+        }
+
+        // personal
+
+        public Respuesta<List<EPersona>> ListaPersonas()
+        {
+            try
+            {
+                List<EPersona> rptLista = new List<EPersona>();
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("usp_ObtenerPersonal", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        con.Open();
+
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                rptLista.Add(new EPersona()
+                                {
+                                    IdPersona = Convert.ToInt32(dr["IdPersona"]),
+                                    NombreCompleto = dr["NombreCompleto"].ToString(),
+                                    CI = dr["CI"].ToString(),
+                                    Correo = dr["Correo"].ToString(),
+                                    Celular = dr["Celular"].ToString(),
+                                    Usuario = dr["Usuario"].ToString(),
+                                    ClaveHash = dr["ClaveHash"].ToString(),
+                                    Estado = Convert.ToBoolean(dr["Estado"])
+                                });
+                            }
+                        }
+                    }
+                }
+                return new Respuesta<List<EPersona>>()
+                {
+                    Estado = true,
+                    Data = rptLista,
+                    Mensaje = "EPersona obtenidos correctamente"
+                };
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error inesperado
+                return new Respuesta<List<EPersona>>()
+                {
+                    Estado = false,
+                    Mensaje = "Ocurrió un error: " + ex.Message,
+                    Data = null
+                };
+            }
+        }
+
+        public Respuesta<bool> RegistrarPersona(EPersona oPersona)
+        {
+            try
+            {
+                bool respuesta = false;
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_RegistrarPersona", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@NombreCompleto", oPersona.NombreCompleto);
+                        cmd.Parameters.AddWithValue("@CI", oPersona.CI);
+                        cmd.Parameters.AddWithValue("@Correo", oPersona.Correo);
+                        cmd.Parameters.AddWithValue("@Celular", oPersona.Celular);
+                        cmd.Parameters.AddWithValue("@Usuario", oPersona.Usuario);
+                        cmd.Parameters.AddWithValue("@ClaveHash", oPersona.ClaveHash);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+                return new Respuesta<bool>
+                {
+                    Estado = respuesta,
+                    Mensaje = respuesta ? "Se registro correctamente" : "Error al registrar intente mas tarde"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<bool> { Estado = false, Mensaje = "Ocurrió un error: " + ex.Message };
+            }
+        }
+
+        public Respuesta<List<EPersona>> ObtenerPersonasFiltro(string Busqueda)
+        {
+            try
+            {
+                List<EPersona> rptLista = new List<EPersona>();
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("sp_ObtenerPersonasFiltro", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@Busqueda", Busqueda);
+                        con.Open();
+
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                rptLista.Add(new EPersona()
+                                {
+                                    IdPersona = Convert.ToInt32(dr["IdPersona"]),
+                                    NombreCompleto = dr["NombreCompleto"].ToString(),
+                                    CI = dr["CI"].ToString(),
+                                    Correo = dr["Correo"].ToString(),
+                                    Celular = dr["Celular"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+                return new Respuesta<List<EPersona>>()
+                {
+                    Estado = true,
+                    Data = rptLista,
+                    Mensaje = "EPersona obtenidos correctamente"
+                };
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error inesperado
+                return new Respuesta<List<EPersona>>()
+                {
+                    Estado = false,
+                    Mensaje = "Ocurrió un error: " + ex.Message,
+                    Data = null
+                };
+            }
+        }
+
     }
 }

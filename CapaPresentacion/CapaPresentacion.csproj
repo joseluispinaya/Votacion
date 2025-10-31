@@ -69,7 +69,9 @@
   <ItemGroup>
     <Content Include="css\sb-admin-2.css" />
     <Content Include="css\sb-admin-2.min.css" />
+    <Content Include="Default.aspx" />
     <Content Include="Imagenes\Avanzar.png" />
+    <Content Include="Imagenes\logoAvanzar.png" />
     <Content Include="Imagenes\odontologia.png" />
     <Content Include="Imagenes\reporttf.png" />
     <Content Include="img\bienvenida.gif" />
@@ -80,21 +82,69 @@
     <Content Include="img\undraw_profile_3.svg" />
     <Content Include="img\undraw_rocket.svg" />
     <Content Include="Inicio.aspx" />
+    <Content Include="jsdev\Inicio.js" />
+    <Content Include="jsdev\Login.js" />
+    <Content Include="jsdev\Masterpa.js" />
     <Content Include="jsdev\PagePartidos.js" />
     <Content Include="js\sb-admin-2.js" />
     <Content Include="js\sb-admin-2.min.js" />
     <Content Include="js\vistas\chart-bar-demo.js" />
     <Content Include="js\vistas\chart-pie-demo.js" />
     <Content Include="js\vistas\datatables-demo.js" />
+    <Content Include="Login.aspx" />
     <Content Include="MasterAdmin\DelegadosAdmin.aspx" />
     <Content Include="MasterAdmin\EleccionAdmin.aspx" />
     <Content Include="MasterAdmin\InicioAdmin.aspx" />
+    <Content Include="MasterAdmin\jsadm\DelegadosAdmin.js" />
     <Content Include="MasterAdmin\jsadm\EleccionAdmin.js" />
     <Content Include="MasterAdmin\jsadm\LocalidadesAdmin.js" />
     <Content Include="MasterAdmin\jsadm\MesasAdmin.js" />
+    <Content Include="MasterAdmin\jsadm\PersonasAdmin.js" />
     <Content Include="MasterAdmin\LocalidadesAdmin.aspx" />
     <Content Include="MasterAdmin\MesasAdmin.aspx" />
+    <Content Include="MasterAdmin\PersonasAdmin.aspx" />
     <Content Include="PagePartidos.aspx" />
+    <Content Include="recursos\css\bootstrap.min.css" />
+    <Content Include="recursos\css\style.css" />
+    <Content Include="recursos\img\about.png" />
+    <Content Include="recursos\img\bg-bottom-footer.png" />
+    <Content Include="recursos\img\bg-bottom-hero.png" />
+    <Content Include="recursos\img\bg-domain.png" />
+    <Content Include="recursos\img\bg-line.png" />
+    <Content Include="recursos\img\bg-round-2.png" />
+    <Content Include="recursos\img\bg-round.png" />
+    <Content Include="recursos\img\bg-square.png" />
+    <Content Include="recursos\img\hero.png" />
+    <Content Include="recursos\img\herov.png" />
+    <Content Include="recursos\img\logoAvanzar.png" />
+    <Content Include="recursos\img\team-1.jpg" />
+    <Content Include="recursos\img\team-2.jpg" />
+    <Content Include="recursos\img\team-3.jpg" />
+    <Content Include="recursos\img\team-4.jpg" />
+    <Content Include="recursos\img\testimonial-1.jpg" />
+    <Content Include="recursos\img\testimonial-2.jpg" />
+    <Content Include="recursos\img\testimonial-3.jpg" />
+    <Content Include="recursos\img\testimonial-4.jpg" />
+    <Content Include="recursos\js\main.js" />
+    <Content Include="recursos\lib\animate\animate.css" />
+    <Content Include="recursos\lib\animate\animate.min.css" />
+    <Content Include="recursos\lib\counterup\counterup.min.js" />
+    <Content Include="recursos\lib\easing\easing.js" />
+    <Content Include="recursos\lib\easing\easing.min.js" />
+    <Content Include="recursos\lib\owlcarousel\assets\ajax-loader.gif" />
+    <Content Include="recursos\lib\owlcarousel\assets\owl.carousel.css" />
+    <Content Include="recursos\lib\owlcarousel\assets\owl.carousel.min.css" />
+    <Content Include="recursos\lib\owlcarousel\assets\owl.theme.default.css" />
+    <Content Include="recursos\lib\owlcarousel\assets\owl.theme.default.min.css" />
+    <Content Include="recursos\lib\owlcarousel\assets\owl.theme.green.css" />
+    <Content Include="recursos\lib\owlcarousel\assets\owl.theme.green.min.css" />
+    <Content Include="recursos\lib\owlcarousel\assets\owl.video.play.png" />
+    <Content Include="recursos\lib\owlcarousel\owl.carousel.js" />
+    <Content Include="recursos\lib\owlcarousel\owl.carousel.min.js" />
+    <Content Include="recursos\lib\waypoints\links.php" />
+    <Content Include="recursos\lib\waypoints\waypoints.min.js" />
+    <Content Include="recursos\lib\wow\wow.js" />
+    <Content Include="recursos\lib\wow\wow.min.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="vendor\bootstrap\js\bootstrap.js" />
@@ -1799,12 +1849,26 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Inicio.aspx.designer.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterAdmin\DelegadosAdmin.aspx.cs">
       <DependentUpon>DelegadosAdmin.aspx</DependentUpon>
@@ -1847,6 +1911,13 @@
     </Compile>
     <Compile Include="MasterAdmin\MesasAdmin.aspx.designer.cs">
       <DependentUpon>MesasAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterAdmin\PersonasAdmin.aspx.cs">
+      <DependentUpon>PersonasAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterAdmin\PersonasAdmin.aspx.designer.cs">
+      <DependentUpon>PersonasAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="PagePartidos.aspx.cs">
       <DependentUpon>PagePartidos.aspx</DependentUpon>
@@ -2040,6 +2111,89 @@
     <Content Include="vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="vendor\jquery\jquery.min.map" />
     <Content Include="vendor\jquery\jquery.slim.min.map" />
+    <Content Include="recursos\lib\owlcarousel\LICENSE" />
+    <Content Include="recursos\scss\bootstrap.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\bootstrap-grid.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\bootstrap-reboot.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\bootstrap-utilities.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\bootstrap.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\forms\_floating-labels.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\forms\_form-check.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\forms\_form-control.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\forms\_form-range.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\forms\_form-select.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\forms\_form-text.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\forms\_input-group.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\forms\_labels.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\forms\_validation.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\helpers\_clearfix.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\helpers\_colored-links.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\helpers\_position.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\helpers\_ratio.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\helpers\_stretched-link.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\helpers\_text-truncation.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\helpers\_visually-hidden.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_alert.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_border-radius.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_box-shadow.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_breakpoints.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_buttons.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_caret.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_clearfix.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_color-scheme.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_container.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_deprecate.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_forms.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_gradients.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_grid.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_image.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_list-group.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_lists.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_pagination.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_reset-text.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_resize.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_table-variants.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_text-truncate.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_transition.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_utilities.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\mixins\_visually-hidden.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\utilities\_api.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\vendor\_rfs.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_accordion.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_alert.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_badge.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_breadcrumb.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_button-group.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_buttons.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_card.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_carousel.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_close.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_containers.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_dropdown.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_forms.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_functions.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_grid.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_helpers.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_images.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_list-group.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_mixins.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_modal.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_nav.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_navbar.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_offcanvas.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_pagination.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_popover.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_progress.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_reboot.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_root.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_spinners.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_tables.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_toasts.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_tooltip.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_transitions.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_type.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_utilities.scss" />
+    <Content Include="recursos\scss\bootstrap\scss\_variables.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CapaEntidad;
+using CapaNegocio;
+using System.Web.Services;
 
 namespace CapaPresentacion
 {
@@ -13,5 +16,56 @@ namespace CapaPresentacion
 		{
 
 		}
-	}
+
+        [WebMethod]
+        public static Respuesta<List<EListaMesasDto>> MesasAsignadasDelegados(int IdPersona, int IdEleccion)
+        {
+            try
+            {
+                if (IdPersona <= 0 || IdEleccion <= 0)
+                {
+                    return new Respuesta<List<EListaMesasDto>>() { Estado = false, Mensaje = "Ocurio un error" };
+                }
+
+                Respuesta<List<EListaMesasDto>> Lista = NDelegado.GetInstance().MesasAsignadasDelegados(IdPersona, IdEleccion);
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error inesperado
+                return new Respuesta<List<EListaMesasDto>>()
+                {
+                    Estado = false,
+                    Mensaje = "Error al obtener las Mesas: " + ex.Message,
+                    Data = null
+                };
+            }
+        }
+
+        [WebMethod]
+        public static Respuesta<List<EPartidoPol>> ListaPartidosVota(int IdEleccion, int IdMesa)
+        {
+            try
+            {
+                if (IdEleccion <= 0 || IdMesa <= 0)
+                {
+                    return new Respuesta<List<EPartidoPol>>() { Estado = false, Mensaje = "Ocurio un error" };
+                }
+
+                Respuesta<List<EPartidoPol>> Lista = NDelegado.GetInstance().ListaPartidosVota(IdEleccion, IdMesa);
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error inesperado
+                return new Respuesta<List<EPartidoPol>>()
+                {
+                    Estado = false,
+                    Mensaje = "Error al obtener las Partidos: " + ex.Message,
+                    Data = null
+                };
+            }
+        }
+
+    }
 }
