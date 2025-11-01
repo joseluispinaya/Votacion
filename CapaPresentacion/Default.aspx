@@ -31,7 +31,8 @@
     <link href="recursos/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="recursos/css/style.css" rel="stylesheet">
+    <%--<link href="recursos/css/style.css" rel="stylesheet">--%>
+    <link href="recursos/css/style.css?v=<%= DateTime.Now.ToString("yyyyMMddHHmmss") %>" rel="stylesheet" />
 </head>
 
 <body>
@@ -81,7 +82,7 @@
                             <a href="#" class="btn btn-secondary py-sm-3 px-sm-5 me-3 animated slideInLeft">Ver mas</a>
                         </div>
                         <div class="col-lg-6 text-center text-lg-start">
-                            <img class="img-fluid animated zoomIn" src="recursos/img/herov.png" alt="">
+                            <img class="img-fluid animated zoomIn" src="recursos/img/heroc.png" alt="">
                         </div>
                     </div>
                 </div>

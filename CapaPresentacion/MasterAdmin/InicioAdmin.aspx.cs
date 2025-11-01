@@ -17,6 +17,7 @@ namespace CapaPresentacion.MasterAdmin
 
 		}
 
+        // no se usa
         [WebMethod]
         public static Respuesta<List<EResultadoGeneral>> ResultadoGeneralVotacion(int IdEleccion)
         {
@@ -36,10 +37,15 @@ namespace CapaPresentacion.MasterAdmin
                 return new Respuesta<List<EResultadoGeneral>>()
                 {
                     Estado = false,
-                    Mensaje = "Error al obtener las Partidos: " + ex.Message
+                    Mensaje = "Error al obtener los resultados: " + ex.Message
                 };
             }
         }
 
+        [WebMethod]
+        public static Respuesta<List<EResultadoGeneral>> ResultGeneVotacionNuevo()
+        {
+            return NResultVoto.GetInstance().ResultGeneVotacionNuevo();
+        }
     }
 }

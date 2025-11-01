@@ -113,10 +113,12 @@
     <Content Include="recursos\img\bg-bottom-hero.png" />
     <Content Include="recursos\img\bg-domain.png" />
     <Content Include="recursos\img\bg-line.png" />
+    <Content Include="recursos\img\bg-lineCa.png" />
     <Content Include="recursos\img\bg-round-2.png" />
     <Content Include="recursos\img\bg-round.png" />
     <Content Include="recursos\img\bg-square.png" />
     <Content Include="recursos\img\hero.png" />
+    <Content Include="recursos\img\heroc.png" />
     <Content Include="recursos\img\herov.png" />
     <Content Include="recursos\img\logoAvanzar.png" />
     <Content Include="recursos\img\team-1.jpg" />

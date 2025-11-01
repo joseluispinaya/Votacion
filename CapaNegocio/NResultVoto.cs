@@ -38,5 +38,10 @@ namespace CapaNegocio
             return DResultVoto.GetInstance().ResultadoGeneralVotacion(IdEleccion);
         }
 
+        public Respuesta<List<EResultadoGeneral>> ResultGeneVotacionNuevo()
+        {
+            return DResultVoto.GetInstance().ResultGeneVotacionNuevo();
+        }
+
     }
 }

@@ -10,5 +10,6 @@ namespace CapaEntidad
     {
         public int IdLocalidad { get; set; }
         public string Nombre { get; set; }
+        //public List<ERecinto> ListaRecintos { get; set; }
     }
 }

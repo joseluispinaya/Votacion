@@ -10,7 +10,10 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-12">
-                    <canvas id="graficoVotacion" style="width: 100%; height: 450px;"></canvas>
+                    <div id="contenedorGrafico">
+                        <canvas id="graficoVotacion" style="width: 100%; height: 450px;"></canvas>
+                    </div>
+                    <%--<canvas id="graficoVotacion" style="width: 100%; height: 450px;"></canvas>--%>
                 </div>
             </div>
         </div>
