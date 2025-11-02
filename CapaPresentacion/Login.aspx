@@ -103,8 +103,8 @@
         <h2>Acceso al Sistema</h2>
 
         <form>
-            <input type="text" id="usuario" name="correo" placeholder="Correo" value="lopez1@yopmail.com" />
-            <input type="password" id="password" name="clave" placeholder="Contraseña" value="123456" />
+            <input type="text" id="usuario" name="correo" placeholder="Correo" value="zerodev32@gmail.com" />
+            <input type="password" id="password" name="clave" placeholder="Contraseña" value="123456789" />
             <button type="button" id="btnInicia">Iniciar Sesión</button>
         </form>
 

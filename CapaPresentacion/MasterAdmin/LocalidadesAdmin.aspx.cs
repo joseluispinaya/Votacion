@@ -18,6 +18,24 @@ namespace CapaPresentacion.MasterAdmin
 		}
 
         [WebMethod]
+        public static Respuesta<List<ELocalidad>> ListaLocalidadesRecinto()
+        {
+            return NResultVoto.GetInstance().ListaLocalidadesRecinto();
+        }
+
+        [WebMethod]
+        public static Respuesta<bool> Guardar(ELocalidad oLocalidad)
+        {
+            return NResultVoto.GetInstance().RegistrarLocalidad(oLocalidad);
+        }
+
+        [WebMethod]
+        public static Respuesta<bool> Editar(ELocalidad oLocalidad)
+        {
+            return NResultVoto.GetInstance().EditarLocalidad(oLocalidad);
+        }
+
+        [WebMethod]
         public static Respuesta<List<ELocalidad>> ListaLocalidades()
         {
             try

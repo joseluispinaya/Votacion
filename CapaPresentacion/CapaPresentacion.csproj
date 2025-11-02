@@ -101,10 +101,14 @@
     <Content Include="MasterAdmin\jsadm\LocalidadesAdmin.js" />
     <Content Include="MasterAdmin\jsadm\MasterpaAd.js" />
     <Content Include="MasterAdmin\jsadm\MesasAdmin.js" />
+    <Content Include="MasterAdmin\jsadm\MilitanciaAdmin.js" />
     <Content Include="MasterAdmin\jsadm\PersonasAdmin.js" />
+    <Content Include="MasterAdmin\jsadm\RecintosAdmin.js" />
     <Content Include="MasterAdmin\LocalidadesAdmin.aspx" />
     <Content Include="MasterAdmin\MesasAdmin.aspx" />
+    <Content Include="MasterAdmin\MilitanciaAdmin.aspx" />
     <Content Include="MasterAdmin\PersonasAdmin.aspx" />
+    <Content Include="MasterAdmin\RecintosAdmin.aspx" />
     <Content Include="PagePartidos.aspx" />
     <Content Include="recursos\css\bootstrap.min.css" />
     <Content Include="recursos\css\style.css" />
@@ -1916,12 +1920,26 @@
     <Compile Include="MasterAdmin\MesasAdmin.aspx.designer.cs">
       <DependentUpon>MesasAdmin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MasterAdmin\MilitanciaAdmin.aspx.cs">
+      <DependentUpon>MilitanciaAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterAdmin\MilitanciaAdmin.aspx.designer.cs">
+      <DependentUpon>MilitanciaAdmin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MasterAdmin\PersonasAdmin.aspx.cs">
       <DependentUpon>PersonasAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MasterAdmin\PersonasAdmin.aspx.designer.cs">
       <DependentUpon>PersonasAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterAdmin\RecintosAdmin.aspx.cs">
+      <DependentUpon>RecintosAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterAdmin\RecintosAdmin.aspx.designer.cs">
+      <DependentUpon>RecintosAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="PagePartidos.aspx.cs">
       <DependentUpon>PagePartidos.aspx</DependentUpon>

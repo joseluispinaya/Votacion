@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="NDelegado.cs" />
     <Compile Include="NLocalidad.cs" />
+    <Compile Include="NMilitante.cs" />
     <Compile Include="NResultVoto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -72,7 +72,7 @@
                 </div>
             </li>
 
-            <!-- Nav Item - Inventario Collapse Menu fas fa-store -->
+            <!-- Nav Item - Inventario Collapse Menu fas fa-id-card -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventario">
                     <i class="fas fa-fw fa-clipboard-list"></i>
@@ -81,27 +81,37 @@
                 <div id="collapseInventario" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="LocalidadesAdmin.aspx">Localidades</a>
-                        <a class="collapse-item" href="#">Reportes</a>
+                        <a class="collapse-item" href="RecintosAdmin.aspx">Agregar Recintos</a>
+                        <a class="collapse-item" href="MesasAdmin.aspx">Agregar Mesas</a>
                     </div>
                 </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="MesasAdmin.aspx">
-                    <i class="fas fa-fw fa-archive"></i>
-                    <span>Agregar Mesas</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="PersonasAdmin.aspx">
-                    <i class="fas fa-fw fa-id-badge"></i>
-                    <span>Agregar Personal</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="DelegadosAdmin.aspx">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
                     <i class="fas fa-fw fa-diagnoses"></i>
-                    <span>Delegados</span></a>
+                    <span>Delegados</span>
+                </a>
+                <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="PersonasAdmin.aspx">Agregar Personal</a>
+                        <a class="collapse-item" href="DelegadosAdmin.aspx">Asignar Delegado</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- DetalleDist.aspx -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
+                    <i class="fas fa-fw fa-id-card"></i>
+                    <span>Militantes</span>
+                </a>
+                <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="MilitanciaAdmin.aspx">Registrar</a>
+                        <a class="collapse-item" href="#">Ver por Distrito</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->

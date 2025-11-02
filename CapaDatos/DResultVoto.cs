@@ -250,5 +250,280 @@ namespace CapaDatos
             }
         }
 
+        //metodo lista localidad mas recintos mejorar mucha solicitud a sql
+        public Respuesta<List<ELocalidad>> ListaLocalidadesRecinto()
+        {
+            try
+            {
+                List<ELocalidad> rptLista = new List<ELocalidad>();
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    // Paso 1: Obtener las localidades
+                    using (SqlCommand comando = new SqlCommand("usp_ObtenerLocalidades", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        con.Open();
+
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                ELocalidad localidad = new ELocalidad()
+                                {
+                                    IdLocalidad = Convert.ToInt32(dr["IdLocalidad"]),
+                                    Nombre = dr["Nombre"].ToString(),
+                                    ListaRecintos = new List<ERecinto>() // Inicializamos la lista vacía
+                                };
+
+                                rptLista.Add(localidad);
+                            }
+                        }
+                    }
+
+                    // Paso 2: Obtener los productos para cada categoría
+                    foreach (var localida in rptLista)
+                    {
+                        using (SqlCommand productoCmd = new SqlCommand("usp_RecintosIdLocali", con))
+                        {
+                            productoCmd.CommandType = CommandType.StoredProcedure;
+                            productoCmd.Parameters.AddWithValue("@IdLocalidad", localida.IdLocalidad);
+
+                            using (SqlDataReader productoDr = productoCmd.ExecuteReader())
+                            {
+                                while (productoDr.Read())
+                                {
+                                    ERecinto recinto = new ERecinto()
+                                    {
+                                        IdRecinto = Convert.ToInt32(productoDr["IdRecinto"]),
+                                        IdLocalidad = Convert.ToInt32(productoDr["IdLocalidad"]),
+                                        Nombre = productoDr["Nombre"].ToString(),
+                                        Estado = Convert.ToBoolean(productoDr["Estado"])
+                                    };
+
+                                    localida.ListaRecintos.Add(recinto);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Si llegamos aquí, la operación fue exitosa
+                return new Respuesta<List<ELocalidad>>()
+                {
+                    Estado = true,
+                    Data = rptLista,
+                    Mensaje = "Localidad y Recintos obtenidos correctamente"
+                };
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores y retorno en caso de excepción
+                return new Respuesta<List<ELocalidad>>()
+                {
+                    Estado = false,
+                    Mensaje = "Ocurrió un error al obtener las Localidades: " + ex.Message,
+                    Data = null
+                };
+            }
+        }
+
+        public Respuesta<bool> RegistrarLocalidad(ELocalidad oLocalidad)
+        {
+            try
+            {
+                bool respuesta = false;
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_RegistrarLocalidad", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@Nombre", oLocalidad.Nombre);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+                return new Respuesta<bool>
+                {
+                    Estado = respuesta,
+                    Mensaje = respuesta ? "Se registro correctamente" : "Error al registrar intente mas tarde"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<bool> { Estado = false, Mensaje = "Ocurrió un error: " + ex.Message };
+            }
+        }
+
+        public Respuesta<bool> EditarLocalidad(ELocalidad oLocalidad)
+        {
+            try
+            {
+                bool respuesta = false;
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_ModificarLocalidad", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@IdLocalidad", oLocalidad.IdLocalidad);
+                        cmd.Parameters.AddWithValue("@Nombre", oLocalidad.Nombre);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+                return new Respuesta<bool>
+                {
+                    Estado = respuesta,
+                    Mensaje = respuesta ? "Se actualizo correctamente" : "Error al actualizar intente mas tarde"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<bool> { Estado = false, Mensaje = "Ocurrió un error: " + ex.Message };
+            }
+        }
+
+        public Respuesta<List<ERecinto>> ListaRecintosTotMesas(int IdLocalidad, int IdEleccion)
+        {
+            try
+            {
+                List<ERecinto> rptLista = new List<ERecinto>();
+
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand comando = new SqlCommand("usp_RecintosConCantidadMesas", con))
+                    {
+                        comando.CommandType = CommandType.StoredProcedure;
+                        comando.Parameters.AddWithValue("@IdLocalidad", IdLocalidad);
+                        comando.Parameters.AddWithValue("@IdEleccion", IdEleccion);
+                        con.Open();
+
+                        using (SqlDataReader dr = comando.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                rptLista.Add(new ERecinto
+                                {
+                                    IdRecinto = Convert.ToInt32(dr["IdRecinto"]),
+                                    Nombre = dr["Nombre"].ToString(),
+                                    Estado = Convert.ToBoolean(dr["Estado"]),
+                                    IdLocalidad = Convert.ToInt32(dr["NroMesas"])
+                                });
+                            }
+                        }
+                    }
+                }
+                return new Respuesta<List<ERecinto>>()
+                {
+                    Estado = true,
+                    Data = rptLista,
+                    Mensaje = "Recintos obtenidos correctamente"
+                };
+            }
+            catch (Exception ex)
+            {
+                // Maneja cualquier error inesperado
+                return new Respuesta<List<ERecinto>>()
+                {
+                    Estado = false,
+                    Mensaje = "Ocurrió un error: " + ex.Message,
+                    Data = null
+                };
+            }
+        }
+
+        public Respuesta<bool> RegistrarRecinto(ERecinto oRecinto)
+        {
+            try
+            {
+                bool respuesta = false;
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_RegistrarRecinto", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@IdLocalidad", oRecinto.IdLocalidad);
+                        cmd.Parameters.AddWithValue("@Nombre", oRecinto.Nombre);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+                return new Respuesta<bool>
+                {
+                    Estado = respuesta,
+                    Mensaje = respuesta ? "Se registro correctamente" : "Error al registrar intente mas tarde"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<bool> { Estado = false, Mensaje = "Ocurrió un error: " + ex.Message };
+            }
+        }
+
+        public Respuesta<bool> EditarRecinto(ERecinto oRecinto)
+        {
+            try
+            {
+                bool respuesta = false;
+                using (SqlConnection con = ConexionBD.GetInstance().ConexionDB())
+                {
+                    using (SqlCommand cmd = new SqlCommand("usp_ModificarRecinto", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@IdRecinto", oRecinto.IdRecinto);
+                        cmd.Parameters.AddWithValue("@IdLocalidad", oRecinto.IdLocalidad);
+                        cmd.Parameters.AddWithValue("@Nombre", oRecinto.Nombre);
+
+                        SqlParameter outputParam = new SqlParameter("@Resultado", SqlDbType.Bit)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        cmd.Parameters.Add(outputParam);
+
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        respuesta = Convert.ToBoolean(outputParam.Value);
+                    }
+                }
+                return new Respuesta<bool>
+                {
+                    Estado = respuesta,
+                    Mensaje = respuesta ? "Se actualizo correctamente" : "Error al actualizar intente mas tarde"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Respuesta<bool> { Estado = false, Mensaje = "Ocurrió un error: " + ex.Message };
+            }
+        }
+
     }
 }
